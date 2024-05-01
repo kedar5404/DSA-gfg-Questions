@@ -1,0 +1,61 @@
+Sum Tree
+===========
+
+Problem:
+----------
+
+Given a Binary Tree. Return true if, for every node X in the tree other than the leaves, its value is equal to the sum of its left subtree's value and its right subtree's value. Else return false.
+
+Solution
+---------
+
+class Solution {
+    boolean isSumTree(Node root) {
+        if (root == null) {
+            return true; // Base case: an empty tree is a sum tree
+        }
+
+        // Check if the current node is a leaf node
+        if (root.left == null && root.right == null) {
+            return true; // A single node is a sum tree
+        }
+
+        // Recursively check if left and right subtrees are sum trees
+        boolean leftSumTree = isSumTree(root.left);
+        boolean rightSumTree = isSumTree(root.right);
+
+        // If both subtrees are sum trees and the current node satisfies the sum tree property
+        if (leftSumTree && rightSumTree && isSumTreeNode(root)) {
+            return true;
+        }
+
+        return false; // Otherwise, the tree is not a sum tree
+    }
+
+    // Helper function to check if a node satisfies the sum tree property
+    boolean isSumTreeNode(Node node) {
+        if (node == null) {
+            return true; // An empty node satisfies the property
+        }
+        
+        // If the current node is a leaf node, its value satisfies the property
+        if (node.left == null && node.right == null) {
+            return true;
+        }
+        
+        // If the current node is not a leaf node, check if its value equals the sum of its children's values
+        if (node.data == (sum(node.left) + sum(node.right))) {
+            return true;
+        }
+
+        return false;
+    }
+
+    // Helper function to calculate the sum of a subtree rooted at a given node
+    int sum(Node node) {
+        if (node == null) {
+            return 0;
+        }
+        return node.data + sum(node.left) + sum(node.right);
+    }
+}
