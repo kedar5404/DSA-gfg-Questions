@@ -36,3 +36,20 @@ class Solution {
         return ans;
     }
 }
+
+public class FairCandySwap {
+    public static void main(String[] args) {
+        Solution solution = new Solution();
+
+        // Example input
+        int[] aliceSizes = { 1, 2, 5 };
+        int[] bobSizes = { 2, 4 };
+
+        // Get the result
+        int[] result = solution.fairCandySwap(aliceSizes, bobSizes);
+
+        // Print the result
+        System.out.println("Alice should swap: " + result[0]);
+        System.out.println("Bob should swap: " + result[1]);
+    }
+}
